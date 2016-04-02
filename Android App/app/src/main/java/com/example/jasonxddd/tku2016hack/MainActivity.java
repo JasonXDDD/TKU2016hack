@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -58,12 +59,8 @@ public class MainActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable = res.getDrawable(R.drawable.login, getTheme());
             relativeLayout.setBackground(drawable);
-        } else {
-            drawable = res.getDrawable(R.drawable.login);
-            relativeLayout.setBackgroundDrawable(drawable);
         }
 
     }
-
 
 }
