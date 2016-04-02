@@ -1,6 +1,9 @@
 package com.example.jasonxddd.tku2016hack;
 
+import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,7 +54,7 @@ public class mainPage extends AppCompatActivity {
             }
         }).start();
 
-        TypeChange("rest", "廢");
+        TypeChange("rest", "廢廢");
     }
 
 
@@ -75,10 +78,8 @@ public class mainPage extends AppCompatActivity {
         TextView subject = (TextView)findViewById(R.id.subject);
         Button btn1 = (Button)findViewById(R.id.btn1);
         Button btn2 = (Button)findViewById(R.id.btn2);
-        RelativeLayout relativeLayout = (RelativeLayout)findViewById(R.id.my_Layout);
-
-        Resources res = this.getResources();
-        Drawable drawable;
+        RelativeLayout relativeLayout = (RelativeLayout)findViewById(R.id.mainLayout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
         if(type.equals("eating")){
@@ -86,10 +87,8 @@ public class mainPage extends AppCompatActivity {
             btn1.setText("選擇");
             btn2.setText("新地點");
 
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                drawable = res.getDrawable(R.drawable.blue, getTheme());
-//                relativeLayout.setBackground(drawable);
-//            }
+            toolbar.setBackgroundColor(Color.parseColor("#C882FD"));
+            relativeLayout.setBackgroundColor(Color.parseColor("#ECD2FF"));
         }
 
         if(type.equals("class")){
@@ -97,15 +96,17 @@ public class mainPage extends AppCompatActivity {
             btn1.setText("考試");
             btn2.setText("作業");
 
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                drawable = res.getDrawable(R.drawable.blue, getTheme());
-//                relativeLayout.setBackground(drawable);
-//            }
+            toolbar.setBackgroundColor(Color.parseColor("#1DBCD4"));
+            relativeLayout.setBackgroundColor(Color.parseColor("#D2F9FF"));
         }
 
         if(type.equals("rest")){
             subject.setText("休息");
             btn1.setText("耍廢");
+
+            toolbar.setBackgroundColor(Color.parseColor("#E9C108"));
+            relativeLayout.setBackgroundColor(Color.parseColor("#FFF7D2"));
+
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
