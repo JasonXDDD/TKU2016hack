@@ -46,7 +46,7 @@ public class mainPage extends AppCompatActivity {
             }
         }).start();
 
-        TypeChange("class", "廢廢");
+        TypeChange("eating", "廢廢");
     }
 
 
@@ -81,6 +81,23 @@ public class mainPage extends AppCompatActivity {
 
             toolbar.setBackgroundColor(Color.parseColor("#C882FD"));
             relativeLayout.setBackgroundColor(Color.parseColor("#ECD2FF"));
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mainPage.this, foodEvent.class);
+                    startActivity(intent);
+                }
+            });
+
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mainPage.this, classEvent.class);
+                    startActivity(intent);
+
+                }
+            });
         }
 
 

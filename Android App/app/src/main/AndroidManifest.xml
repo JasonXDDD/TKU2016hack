@@ -21,7 +21,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Reg_Name" />
         <activity android:name=".Reg_Email" />
-        <activity android:name=".classEvent"></activity>
+        <activity android:name=".classEvent" />
+        <activity android:name=".foodEvent" />
+        <activity android:name=".foodChoose" />
+        <activity android:name=".foodNew"></activity>
     </application>
 
 </manifest>
