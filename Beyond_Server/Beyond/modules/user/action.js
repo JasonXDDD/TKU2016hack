@@ -27,6 +27,9 @@ var addUser = function(firstName, lastName, username, email, password, permissio
     .then(function(user){
         return deleteSensitiveInformation(user);
     })
+    .then(function(user){
+        return user.generateToken();
+    })
     .catch(function(err){
         console.log("Add user failed - " + err);  
         throw(err);
