@@ -1,0 +1,30 @@
+{
+  "name": "c-far",
+  "version": "1.0.0",
+  "description": "C-FAR's website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.2.1",
+    "body-parser": "^1.14.2",
+    "connect-redis": "^3.0.2",
+    "dockerode": "^2.2.8",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-session": "^1.13.0",
+    "helmet": "^1.0.2",
+    "mkdirp": "^0.5.1",
+    "mongoose": "^4.4.3",
+    "morgan": "^1.6.1",
+    "mysql": "^2.10.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "q": "^1.4.1",
+    "sequelize": "^3.17.1"
+  }
+}
