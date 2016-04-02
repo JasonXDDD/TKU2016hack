@@ -19,7 +19,8 @@
             android:name=".mainPage"
             android:label="@string/title_activity_main_page"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Reg_Name"></activity>
+        <activity android:name=".Reg_Name" />
+        <activity android:name=".Reg_Email"></activity>
     </application>
 
 </manifest>

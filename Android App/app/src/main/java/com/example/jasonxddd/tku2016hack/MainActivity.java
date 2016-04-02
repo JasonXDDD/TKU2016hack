@@ -45,6 +45,16 @@ public class MainActivity extends Activity {
             }
         });
 
+        Button reg = (Button) findViewById(R.id.register);
+        reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Reg_Name.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         RelativeLayout relativeLayout = (RelativeLayout)findViewById(R.id.my_Layout);
         Resources res = this.getResources();
