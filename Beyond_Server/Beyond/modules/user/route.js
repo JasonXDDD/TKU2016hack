@@ -44,7 +44,7 @@ router.post('/delete', function(req, res){
     res.status(501).send("<h1>Not implemented</h1>");
 });
 
-router.post('/login', jsonParser, passport.authenticate('local'), function(req, res, next){
+router.post('/login', jsonParser, passport.authenticate('local', { session: false }), function(req, res, next){
     res.status(200).json(req.user);
     // res.status(200).json({message: 'Login successed.'});
 });

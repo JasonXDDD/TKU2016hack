@@ -1,5 +1,5 @@
-var Timetable = require('./models').timetable;
-var User = app.active_modules.user;
+var Timetable = require('./models').Timetable;
+var User = require('../user/models').User;
 var sequelize = app.db;
 
 var addTimetable = function(creator, tablename, subject, weekday, classroom, teacher, start_time, end_time, description){

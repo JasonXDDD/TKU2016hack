@@ -56,7 +56,7 @@ var getUserById = function(uid, getAllData){
     if (getAllData) return User.findById(uid);
     else {
         return User.findById(uid, 
-        {attributes: ['firstName', 'lastName', 'username', 'email', 'permission', 'language', 'uid']})
+        {attributes: ['firstName', 'lastName', 'username', 'email', 'permission', 'language', 'uid', 'token']})
     }
 }
 
@@ -66,7 +66,7 @@ var getUserByEmail = function(email, getAllData){
     else {
         return User.findOne({
             where:{ email: email },
-            attributes: ['firstName', 'lastName', 'username', 'email', 'permission', 'language', 'uid']
+            attributes: ['firstName', 'lastName', 'username', 'email', 'permission', 'language', 'uid', 'token']
         });
     }
 }

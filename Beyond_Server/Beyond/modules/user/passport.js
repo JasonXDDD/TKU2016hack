@@ -24,6 +24,7 @@ passport.use('local', new LocalStrategy({
         if(!(user.validatePassword(password))) return done(null, false);
         user = action.deleteSensitiveInformation(user); // Don't let frontend know user's password.
         user.updateLoginTime();
+        user.generateToken();
         return done(null, user);
     })
     .catch(function(err){
