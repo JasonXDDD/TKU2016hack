@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                Intent intent = new Intent(MainActivity.this, mainPage.class);
                 startActivity(intent);
                 finish();
             }
