@@ -19,7 +19,7 @@ config.active_modules = {
         route: '/homework'  
     },
     restaurant: {
-        route: '/restaurant'
+        route: '/'
     }
 }
 

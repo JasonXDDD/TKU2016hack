@@ -37,6 +37,14 @@ var getRestaurant = function(id){
     return Restaurant.findById(id);
 }
 
+var getRestaurantListByArea = function(area){
+    return Restaurant.findAll({
+        where: {
+            area: area
+        }
+    })
+}
+
 var editRestaurant = function(id, name,address, lat, lng, area, suiteTime, avarage_cost, mealType){
     return sequelize.transaction(function(t){
         return Restaurant.findById(id)
@@ -106,6 +114,12 @@ var getEatLog = function(id){
     return EatLog.findById(id);
 }
 
+var getEatLogListByUser = function(userId){
+    return EatLog.findAll({
+        where: { creatorUid: userId }
+    });
+}
+
 var editEatLog = function(id, content, cost, date){
     return sequelize.transaction(function(t){
         return EatLog.findById(id)
@@ -134,8 +148,10 @@ module.exports.addRestaurant = addRestaurant;
 module.exports.getRestaurant = getRestaurant;
 module.exports.editRestaurant = editRestaurant;
 module.exports.deleteRestaurant = deleteRestaurant;
+module.exports.getRestaurantListByArea = getRestaurantListByArea;
 
 module.exports.addEatLog = addEatLog;
 module.exports.getEatLog = getEatLog;
+module.exports.getEatLogListByUser = getEatLogListByUser;
 module.exports.editEatLog = editEatLog;
 module.exports.deleteEatLog = deleteEatLog;

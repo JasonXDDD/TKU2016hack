@@ -8,7 +8,7 @@ var moment = require('moment');
 
 router.use('/assets', Express.static(__dirname + '/public/assets'));
     
-router.get('/:id', function(req, res){
+router.get('/restaurant/:id', function(req, res){
     return action.getRestaurant(req.params['id'])
     .then(function(restaurant){
         res.status(200).json(restaurant);
@@ -19,7 +19,22 @@ router.get('/:id', function(req, res){
     })
 });
 
-router.post('/add', jsonParser, function(req, res, next){
+router.get('/restaurant/', function (req, res) {
+    if(!(req.query.token))
+        res.status(401).end();
+    User.findOne({where: {token: req.query.token}})
+    .then(function(user){
+        return action.getRestaurantListByArea(req.query.area);  
+    })    
+    .then(function(list){
+        return res.status(200).json(list);
+    })
+    .catch(function(err){
+        return res.status(500).json({message: 'Get restaurant list failed - ' + err});
+    })
+})
+
+router.post('/restaurant/add', jsonParser, function(req, res, next){
     if(!(req.body.token))
         res.status(401).end();
     User.findOne({where: {token: req.body.token}})
@@ -38,7 +53,7 @@ router.post('/add', jsonParser, function(req, res, next){
     })
 });
 
-router.post('/:id/edit', jsonParser, function(req, res){
+router.post('/restaurant/:id/edit', jsonParser, function(req, res){
     User.findOne({where: {
         token: req.body.token
     }})
@@ -63,7 +78,7 @@ router.post('/:id/edit', jsonParser, function(req, res){
     }) 
 });
 
-router.post('/:id/delete', jsonParser, function(req, res){
+router.post('/restaurant/:id/delete', jsonParser, function(req, res){
     User.findOne({where: {
         token: req.body.token
     }})
@@ -119,6 +134,21 @@ router.get('/eatlog/:id', function(req, res){
     .catch(function(err){
         console.error("Get eatlog failed - " + err);
         res.status(500).end();
+    })
+})
+
+router.get('/eatlog', function(req, res){
+    if(!(req.query.token))
+        res.status(401).end();
+    User.findOne({where: {token: req.query.token}})
+    .then(function(user){
+        return action.getEatLogListByUser(user.uid)  
+    })    
+    .then(function(list){
+        return res.status(200).json(list);
+    })
+    .catch(function(err){
+        return res.status(500).json({message: 'Get eatlog list failed - ' + err});
     })
 })
 

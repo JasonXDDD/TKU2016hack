@@ -1,6 +1,7 @@
 var Timetable = require('./models').Timetable;
 var User = require('../user/models').User;
 var sequelize = app.db;
+var moment = require('moment');
 
 var addTimetable = function(creator, tablename, subject, weekday, classroom, teacher, start_time, end_time, description){
     var timetable, user;
@@ -43,6 +44,22 @@ var getTimetableListByUser = function(userId){
     });
 }
 
+var getUserStatus = function (userId) {
+    var now = moment();
+    var timeForCompare = moment(0).add(now.hour(), 'hours').add(now.minute(), 'minutes');
+    return Timetable.findAll({
+        where: {
+            start_time: {
+                $lt: timeForCompare.format('YYYY/MM/DD HH:mm:ss')
+            },
+            end_time: {
+                $gt: timeForCompare.format('YYYY/MM/DD HH:mm:ss')
+            },
+            creatorUid: userId
+        }
+    })
+}
+
 var editTimetable = function(id, tablename, subject, weekday, classroom, teacher, start_time, end_time, description){
     return sequelize.transaction(function(t){
         return Timetable.findById(id)
@@ -77,3 +94,4 @@ module.exports.getTimetable = getTimetable;
 module.exports.editTimetable = editTimetable;
 module.exports.deleteTimetable = deleteTimetable;
 module.exports.getTimetableListByUser = getTimetableListByUser;
+module.exports.getUserStatus = getUserStatus;

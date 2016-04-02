@@ -22,6 +22,21 @@ router.get('/', function(req, res){
         return res.status(500).json({message: 'Get timetable list failed - ' + err});
     })
 })    
+
+router.get('/status', function(req, res){
+    if(!(req.query.token))
+        res.status(401).end();
+    User.findOne({where: {token: req.query.token}})
+    .then(function(user){
+        return action.getUserStatus(user.uid)  
+    })    
+    .then(function(list){
+        return res.status(200).json(list);
+    })
+    .catch(function(err){
+        return res.status(500).json({message: 'Get userStatus list failed - ' + err});
+    })
+})
     
 router.get('/:id', function(req, res){
     return action.getTimetable(req.params['id'])
