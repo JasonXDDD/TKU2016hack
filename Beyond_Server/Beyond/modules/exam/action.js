@@ -34,6 +34,12 @@ var getExam = function(id){
     return Exam.findById(id);
 }
 
+var getExamListByUser = function(userId){
+    return Exam.findAll({
+        where: { creatorUid: userId }
+    });
+}
+
 var editExam = function(id, title, subject, location, time, description){
     return sequelize.transaction(function(t){
         return Exam.findById(id)
@@ -64,3 +70,4 @@ module.exports.addExam = addExam;
 module.exports.getExam = getExam;
 module.exports.editExam = editExam;
 module.exports.deleteExam = deleteExam;
+module.exports.getExamListByUser = getExamListByUser;

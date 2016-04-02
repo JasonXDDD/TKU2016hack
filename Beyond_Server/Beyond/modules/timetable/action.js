@@ -4,6 +4,8 @@ var sequelize = app.db;
 
 var addTimetable = function(creator, tablename, subject, weekday, classroom, teacher, start_time, end_time, description){
     var timetable, user;
+    start_time = moment(0).add(start_time.split(':')[0], 'hours').add(start_time.split(':')[1], 'minutes');
+    end_time = moment(0).add(end_time.split(':')[0], 'hours').add(end_time.split(':')[1], 'minutes');
     return sequelize.transaction(function(t){
         return Timetable.create({
             tablename: tablename,
@@ -52,8 +54,8 @@ var editTimetable = function(id, tablename, subject, weekday, classroom, teacher
             if(weekday) tmpTimetable.weekday = weekday;
             if(classroom) tmpTimetable.classroom = classroom;
             if(teacher) tmpTimetable.teacher = teacher;
-            if(start_time) tmpTimetable.start_time = new Date('1970-01-01 ' + start_time + ':00Z');
-            if(end_time) tmpTimetable.end_time = new Date('1970-01-01 ' + end_time + ':00Z');
+            if(start_time) tmpTimetable.start_time = moment(0).add(start_time.split(':')[0], 'hours').add(start_time.split(':')[1], 'minutes');
+            if(end_time) tmpTimetable.end_time = moment(0).add(end_time.split(':')[0], 'hours').add(end_time.split(':')[1], 'minutes');
             if(description) tmpTimetable.description = description;
             
             return tmpTimetable.save({transaction: t});

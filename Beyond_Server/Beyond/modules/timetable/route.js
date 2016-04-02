@@ -40,7 +40,7 @@ router.post('/add', jsonParser, function(req, res, next){
     User.findOne({where: {token: req.body.token}})
     .then(function(user){
         if (!user) return res.status(403).end();
-        if (!(req.body.tablename)  ||
+        if ( !(req.body.tablename)  ||
              !(req.body.subject)    ||
              !(req.body.weekday)    ||
              !(req.body.start_time) ||
@@ -50,8 +50,6 @@ router.post('/add', jsonParser, function(req, res, next){
         }
         else{
             var body = req.body;
-            body.start_time = new Date('1970-01-01 ' + body.start_time + ':00Z');
-            body.end_time = new Date('1970-01-01 ' + body.end_time + ':00Z');
             return action.addTimetable(user.uid, body.tablename, body.subject, body.weekday, body.classroom, body.teacher, body.start_time, body.end_time, body.description)
                 .then(function(_timetable){
                     res.status(201).json(_timetable).end();

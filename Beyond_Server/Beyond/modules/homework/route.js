@@ -8,6 +8,21 @@ var moment = require('moment');
 
 router.use('/assets', Express.static(__dirname + '/public/assets'));
     
+router.get('/', function(req, res){
+    if(!(req.query.token))
+        res.status(401).end();
+    User.findOne({where: {token: req.query.token}})
+    .then(function(user){
+        return action.getHomeworkListByUser(user.uid)  
+    })    
+    .then(function(list){
+        return res.status(200).json(list);
+    })
+    .catch(function(err){
+        return res.status(500).json({message: 'Get timetable list failed - ' + err});
+    })
+})
+
 router.get('/:id', function(req, res){
     return action.getHomework(req.params['id'])
     .then(function(homework){

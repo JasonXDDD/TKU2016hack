@@ -32,6 +32,12 @@ var getHomework = function(id){
     return Homework.findById(id);
 }
 
+var getHomeworkListByUser = function(userId){
+    return Homework.findAll({
+        where: { creatorUid: userId }
+    });
+}
+
 var editHomework = function(id, title, subject, deadline, description){
     return sequelize.transaction(function(t){
         return Homework.findById(id)
@@ -61,3 +67,4 @@ module.exports.addHomework = addHomework;
 module.exports.getHomework = getHomework;
 module.exports.editHomework = editHomework;
 module.exports.deleteHomework = deleteHomework;
+module.exports.getHomeworkListByUser = getHomeworkListByUser;
