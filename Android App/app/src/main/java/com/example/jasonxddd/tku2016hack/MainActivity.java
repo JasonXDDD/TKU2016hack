@@ -2,13 +2,10 @@ package com.example.jasonxddd.tku2016hack;
 
 import android.app.Activity;
 import android.content.Intent;
-<<<<<<< Updated upstream
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
-=======
->>>>>>> Stashed changes
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -37,9 +34,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, mainPage.class);
-
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-
                 startActivity(intent);
                 finish();
             }
