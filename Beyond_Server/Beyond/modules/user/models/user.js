@@ -38,6 +38,10 @@ module.exports = function(sequelize){
                 type: Sequelize.STRING,
                 allowNull: false      
             },
+            password_salt: {
+                type: Sequelize.STRING,
+                allowNull: false  
+            },
             permission: {
                 type: Sequelize.INTEGER
             },
@@ -66,7 +70,10 @@ module.exports = function(sequelize){
         {
             instanceMethods: {
                 validatePassword: function(inputPassword){
-                    return inputPassword == this.password;
+                    var hash = crypto.createHash('sha512');
+                    hash.update(inputPassword);
+                    hash.update(this.password_salt);
+                    return hash.digest('hex') === this.password;
                 },
                 updateLoginTime: function(){
                     this.last_login = Date.now();
@@ -86,6 +93,24 @@ module.exports = function(sequelize){
                             _this.token = hash.digest('hex');
                             return resolve(_this.save());
                         });
+                    })
+                },
+                setPassword: function(password){
+                    var _this = this;
+                    return new Promise(function(resolve, reject){
+                        return crypto.randomBytes(64, function(err, buffer){
+                            if(err) reject(err);
+                            
+                            var salt = buffer.toString('hex');
+                            var hash = crypto.createHash('sha512');
+                            hash.update(password);
+                            hash.update(salt);
+                            
+                            _this.password = hash.digest('hex');
+                            _this.password_salt = salt;
+                            
+                            return resolve(_this.save());
+                        });  
                     })
                 }
             }   

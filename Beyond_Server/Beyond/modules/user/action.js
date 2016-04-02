@@ -19,16 +19,20 @@ var addUser = function(firstName, lastName, username, email, password, permissio
         lastName: lastName,
         username: username,
         email: email,
-        password: password,
+        password: '',
+        password_salt: '',
         permission: permission, 
         language: language,
         locked: false
     })
     .then(function(user){
-        return deleteSensitiveInformation(user);
+        return user.setPassword(password);
     })
     .then(function(user){
         return user.generateToken();
+    })
+    .then(function(user){
+        return deleteSensitiveInformation(user);
     })
     .catch(function(err){
         console.log("Add user failed - " + err);  
@@ -78,8 +82,10 @@ var deleteSensitiveInformation = function(user){
     if(user.password) delete user.password;
     if(user.createdAt) delete user.createdAt;
     if(user.updatedAt) delete user.updatedAt;
+    if(user.password_salt) delete user.password_salt;
     
     if(user.dataValues.password) delete user.dataValues.password;
+    if(user.dataValues.password_salt) delete user.dataValues.password_salt;
     if(user.dataValues.createdAt) delete user.dataValues.createdAt;
     if(user.dataValues.updatedAt) delete user.dataValues.updatedAt;
     
