@@ -46,10 +46,13 @@ var editUser = function(uid, firstName, lastName, username, email, password, per
        if(firstName) user.firstName = firstName;
        if(lastName) user.lastName = lastName;
        if(email) user.email = email;
-       if(password) user.password = password;
        if(permission) user.permission = permission;
        if(language) user.language = language;
        return user.save()
+       .then(function(user){
+           if(password) return user.setPassword(password);
+           else return user;
+       })
        .catch(function(err){
            console.error('Edit user failed - ' + err);
        });

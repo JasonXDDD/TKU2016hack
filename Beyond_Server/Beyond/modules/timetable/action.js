@@ -35,6 +35,12 @@ var getTimetable = function(id){
     return Timetable.findById(id);
 }
 
+var getTimetableListByUser = function(userId){
+    return Timetable.findAll({
+        where: { creatorUid: userId }
+    });
+}
+
 var editTimetable = function(id, tablename, subject, weekday, classroom, teacher, start_time, end_time, description){
     return sequelize.transaction(function(t){
         return Timetable.findById(id)
@@ -68,3 +74,4 @@ module.exports.addTimetable = addTimetable;
 module.exports.getTimetable = getTimetable;
 module.exports.editTimetable = editTimetable;
 module.exports.deleteTimetable = deleteTimetable;
+module.exports.getTimetableListByUser = getTimetableListByUser;
