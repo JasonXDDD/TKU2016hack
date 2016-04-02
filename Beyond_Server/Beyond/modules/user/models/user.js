@@ -3,6 +3,7 @@
 
 var Sequelize = require('sequelize');
 var crypto = require('crypto');
+var Promise = require('bluebird');
 var User;
 
 /*
@@ -73,17 +74,19 @@ module.exports = function(sequelize){
                 },
                 generateToken: function(){
                     var _this = this;
-                    return crypto.randomBytes(64, function(err, buffer){
-                        if(err) throw err;
-                        
-                        var salt = buffer.toString('hex');
-                        var hash = crypto.createHash('sha512');
-                        // hash.update(Date.now());
-                        hash.update(salt);
-                        
-                        _this.token = hash.digest('hex');
-                        return _this.save();
-                    });
+                    return new Promise(function(resolve, reject){
+                        crypto.randomBytes(64, function(err, buffer){
+                            if(err) reject(err);
+                            
+                            var salt = buffer.toString('hex');
+                            var hash = crypto.createHash('sha512');
+                            // hash.update(Date.now());
+                            hash.update(salt);
+                            
+                            _this.token = hash.digest('hex');
+                            return resolve(_this.save());
+                        });
+                    })
                 }
             }   
         });   

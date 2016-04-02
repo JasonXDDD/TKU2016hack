@@ -44,5 +44,5 @@ for (var m in modules){
 //     return db.query('SET FOREIGN_KEY_CHECKS = 1')
 // })
 
-db.query("SET GLOBAL time_zone = '+8:00';");
+// db.query("SET GLOBAL time_zone = '+8:00';");
 db.sync({force: false}); // Sync database schema after loaded all the modules.

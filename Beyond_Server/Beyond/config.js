@@ -9,11 +9,17 @@ config.active_modules = {
     user: {
         route: '/user'
     },
-    article: {
-        route: '/article'
-    },
     timetable: {
         route: '/timetable'
+    },
+    exam: {
+        route: '/exam'
+    },
+    homework: {
+        route: '/homework'  
+    },
+    restaurant: {
+        route: '/restaurant'
     }
 }
 

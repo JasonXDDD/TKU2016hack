@@ -9,7 +9,7 @@ var moment = require('moment');
 router.use('/assets', Express.static(__dirname + '/public/assets'));
     
 router.get('/:id', function(req, res){
-    return action.getTimetable(req.params['id'])
+    return action.getExam(req.params['id'])
     .then(function(timetable){
         res.status(200).json(timetable);
     })
@@ -25,19 +25,15 @@ router.post('/add', jsonParser, function(req, res, next){
     User.findOne({where: {token: req.body.token}})
     .then(function(user){
         if (!user) return res.status(403).end();
-        if (!(req.body.tablename)  ||
+        if (!(req.body.title)  ||
              !(req.body.subject)    ||
-             !(req.body.weekday)    ||
-             !(req.body.start_time) ||
-             !(req.body.end_time)
+             !(req.body.time)
              ){
             res.status(400).json({message: 'Missing required fields.'}).end();
         }
         else{
             var body = req.body;
-            body.start_time = new Date('1970-01-01 ' + body.start_time + ':00Z');
-            body.end_time = new Date('1970-01-01 ' + body.end_time + ':00Z');
-            return action.addTimetable(user.uid, body.tablename, body.subject, body.weekday, body.classroom, body.teacher, body.start_time, body.end_time, body.description)
+            return action.addExam(user.uid, body.title, body.subject, body.location, body.time, body.description)
                 .then(function(_timetable){
                     res.status(201).json(_timetable).end();
                 });
@@ -53,7 +49,7 @@ router.post('/:id/edit', jsonParser, function(req, res){
         console.log(user);
         if(!user) return res.status(403).json({message: 'You have no permission to do it. YEE'}).end();
         if(user.permission < 2){ // Not admin, check if is owner.
-            action.getTimetable(req.params['id'])
+            action.getExam(req.params['id'])
             .then(function(_timetable){
                 if(_timetable.creatorUid != user.uid){
                     console.log(_timetable);
@@ -63,7 +59,7 @@ router.post('/:id/edit', jsonParser, function(req, res){
             });
         }
         var body = req.body;
-        return action.editTimetable(req.params['id'], body.tablename, body.subject, body.weekday, body.classroom, body.teacher, body.start_time, body.end_time, body.description)
+        return action.editExam(req.params['id'], body.title, body.subject, body.location, body.time, body.description)
             .then(function(_timetable){
                 res.status(200).json(_timetable).end();
             })    
@@ -78,16 +74,16 @@ router.post('/:id/delete', jsonParser, function(req, res){
     .then(function(user){
         if(!user) return res.status(403).json({message: 'You have no permission to do it.'}).end();
         if(user.permission < 2){ // Not admin, check if is owner.
-            action.getTimetable(req.params['id'])
+            action.getExam(req.params['id'])
             .then(function(_timetable){
-                if(!_timetable) {res.status(404).json({message: 'Timetable not found.'}).end(); return; }
+                if(!_timetable) {res.status(404).json({message: 'Exam not found.'}).end(); return; }
                 if(_timetable.creatorUid != user.uid){
                     res.status(403).json({message: 'You have no permission to do it.'}).end();
                     return;
                 }
             });
         }
-        return action.deleteTimetable(req.params['id'])
+        return action.deleteExam(req.params['id'])
             .then(function(){
                 res.status(200).json({message: 'Delete successful.'}).end();
             })

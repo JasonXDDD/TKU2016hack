@@ -9,12 +9,12 @@ var moment = require('moment');
 router.use('/assets', Express.static(__dirname + '/public/assets'));
     
 router.get('/:id', function(req, res){
-    return action.getTimetable(req.params['id'])
-    .then(function(timetable){
-        res.status(200).json(timetable);
+    return action.getHomework(req.params['id'])
+    .then(function(homework){
+        res.status(200).json(homework);
     })
     .catch(function(err){
-        console.error("Get timetable failed - " + err);
+        console.error("Get homework failed - " + err);
         res.status(500).end();
     })
 });
@@ -25,21 +25,17 @@ router.post('/add', jsonParser, function(req, res, next){
     User.findOne({where: {token: req.body.token}})
     .then(function(user){
         if (!user) return res.status(403).end();
-        if (!(req.body.tablename)  ||
+        if (!(req.body.title)  ||
              !(req.body.subject)    ||
-             !(req.body.weekday)    ||
-             !(req.body.start_time) ||
-             !(req.body.end_time)
+             !(req.body.deadline)
              ){
             res.status(400).json({message: 'Missing required fields.'}).end();
         }
         else{
             var body = req.body;
-            body.start_time = new Date('1970-01-01 ' + body.start_time + ':00Z');
-            body.end_time = new Date('1970-01-01 ' + body.end_time + ':00Z');
-            return action.addTimetable(user.uid, body.tablename, body.subject, body.weekday, body.classroom, body.teacher, body.start_time, body.end_time, body.description)
-                .then(function(_timetable){
-                    res.status(201).json(_timetable).end();
+            return action.addHomework(user.uid, body.title, body.subject, body.deadline, body.description)
+                .then(function(_homework){
+                    res.status(201).json(_homework).end();
                 });
         }
     })
@@ -51,21 +47,21 @@ router.post('/:id/edit', jsonParser, function(req, res){
     }})
     .then(function(user){
         console.log(user);
-        if(!user) return res.status(403).json({message: 'You have no permission to do it. YEE'}).end();
+        if(!user) return res.status(403).json({message: 'You have no permission to do it.'}).end();
         if(user.permission < 2){ // Not admin, check if is owner.
-            action.getTimetable(req.params['id'])
-            .then(function(_timetable){
-                if(_timetable.creatorUid != user.uid){
-                    console.log(_timetable);
+            action.getHomework(req.params['id'])
+            .then(function(_homework){
+                if(_homework.creatorUid != user.uid){
+                    console.log(_homework);
                     res.status(403).json({message: 'You have no permission to do it.'}).end();
                     return;
                 }
             });
         }
         var body = req.body;
-        return action.editTimetable(req.params['id'], body.tablename, body.subject, body.weekday, body.classroom, body.teacher, body.start_time, body.end_time, body.description)
-            .then(function(_timetable){
-                res.status(200).json(_timetable).end();
+        return action.editHomework(req.params['id'], body.title, body.subject, body.deadline, body.description)
+            .then(function(_homework){
+                res.status(200).json(_homework).end();
             })    
     })
     
@@ -78,16 +74,16 @@ router.post('/:id/delete', jsonParser, function(req, res){
     .then(function(user){
         if(!user) return res.status(403).json({message: 'You have no permission to do it.'}).end();
         if(user.permission < 2){ // Not admin, check if is owner.
-            action.getTimetable(req.params['id'])
-            .then(function(_timetable){
-                if(!_timetable) {res.status(404).json({message: 'Timetable not found.'}).end(); return; }
-                if(_timetable.creatorUid != user.uid){
+            action.getHomework(req.params['id'])
+            .then(function(_homework){
+                if(!_homework) {res.status(404).json({message: 'Homework not found.'}).end(); return; }
+                if(_homework.creatorUid != user.uid){
                     res.status(403).json({message: 'You have no permission to do it.'}).end();
                     return;
                 }
             });
         }
-        return action.deleteTimetable(req.params['id'])
+        return action.deleteHomework(req.params['id'])
             .then(function(){
                 res.status(200).json({message: 'Delete successful.'}).end();
             })
