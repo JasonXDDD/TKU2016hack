@@ -41,16 +41,16 @@ var editTimetable = function(id, tablename, subject, weekday, classroom, teacher
         .then(function(_timetable){
             tmpTimetable = _timetable;
             
-            if(tablename) tmpArticle.tablename = tablename;
-            if(subject) tmpArticle.subject = subject;
-            if(weekday) tmpArticle.weekday = weekday;
-            if(classroom) tmpArticle.classroom = classroom;
-            if(teacher) tmpArticle.teacher = teacher;
-            if(start_time) tmpArticle.start_time = start_time;
-            if(end_time) tmpArticle.end_time = end_time;
-            if(description) tmpArticle.description = description;
+            if(tablename) tmpTimetable.tablename = tablename;
+            if(subject) tmpTimetable.subject = subject;
+            if(weekday) tmpTimetable.weekday = weekday;
+            if(classroom) tmpTimetable.classroom = classroom;
+            if(teacher) tmpTimetable.teacher = teacher;
+            if(start_time) tmpTimetable.start_time = new Date('1970-01-01 ' + start_time + ':00Z');
+            if(end_time) tmpTimetable.end_time = new Date('1970-01-01 ' + end_time + ':00Z');
+            if(description) tmpTimetable.description = description;
             
-            return tmpArticle.save({transaction: t});
+            return tmpTimetable.save({transaction: t});
         }) 
     }) 
 }

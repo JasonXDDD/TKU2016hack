@@ -45,5 +45,4 @@ for (var m in modules){
 // })
 
 db.query("SET GLOBAL time_zone = '+8:00';");
-db.query("select now();");
 db.sync({force: false}); // Sync database schema after loaded all the modules.

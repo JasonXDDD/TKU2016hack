@@ -4,6 +4,7 @@ var sequelize = new Sequelize(config.database.sql.dbname, config.database.sql.us
   host: config.database.sql.host,
   dialect: config.database.sql.type,
   port: config.database.sql.port,
+  timezone: '+08:00',
   pool: {
     max: 5,
     min: 0,

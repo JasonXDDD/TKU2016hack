@@ -10,10 +10,13 @@ router.use('/assets', Express.static(__dirname + '/public/assets'));
     
 router.get('/:id', function(req, res){
     return action.getTimetable(req.params['id'])
-        .catch(function(err){
-            console.error("Get timetable failed - " + err);
-            res.status(500).end();
-        })
+    .then(function(timetable){
+        res.status(200).json(timetable);
+    })
+    .catch(function(err){
+        console.error("Get timetable failed - " + err);
+        res.status(500).end();
+    })
 });
 
 router.post('/add', jsonParser, function(req, res, next){
@@ -32,8 +35,8 @@ router.post('/add', jsonParser, function(req, res, next){
         }
         else{
             var body = req.body;
-            body.start_time = moment("1970/01/01 " + body.start_time, "YYYY/MM/DD HH:mm:ss").format("YYYY/MM/DD HH:mm:ss");
-            body.end_time = moment("1970/01/01 " + body.end_time, "YYYY/MM/DD HH:mm:ss").format("YYYY/MM/DD HH:mm:ss");
+            body.start_time = new Date('1970-01-01 ' + body.start_time + ':00Z');
+            body.end_time = new Date('1970-01-01 ' + body.end_time + ':00Z');
             return action.addTimetable(user.uid, body.tablename, body.subject, body.weekday, body.classroom, body.teacher, body.start_time, body.end_time, body.description)
                 .then(function(_timetable){
                     res.status(201).json(_timetable).end();
@@ -47,11 +50,13 @@ router.post('/:id/edit', jsonParser, function(req, res){
         token: req.body.token
     }})
     .then(function(user){
-        if(!user) return res.status(403).json({message: 'You have no permission to do it.'}).end();
+        console.log(user);
+        if(!user) return res.status(403).json({message: 'You have no permission to do it. YEE'}).end();
         if(user.permission < 2){ // Not admin, check if is owner.
             action.getTimetable(req.params['id'])
             .then(function(_timetable){
-                if(_timetable.creator != user.uid){
+                if(_timetable.creatorUid != user.uid){
+                    console.log(_timetable);
                     res.status(403).json({message: 'You have no permission to do it.'}).end();
                     return;
                 }
