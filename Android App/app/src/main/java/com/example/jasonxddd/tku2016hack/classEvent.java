@@ -35,6 +35,16 @@ public class classEvent extends AppCompatActivity {
 
         Button quizTIme = (Button)findViewById(R.id.quizTime);
         quizTIme.setOnClickListener(Clock);
+
+        Button quizSubmit = (Button)findViewById(R.id.quizSubmit);
+        quizSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(classEvent.this, mainPage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public View.OnClickListener Clock = new View.OnClickListener() {

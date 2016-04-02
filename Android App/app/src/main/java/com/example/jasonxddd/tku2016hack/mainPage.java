@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,20 +26,30 @@ public class mainPage extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final RadioButton btn_Class = (RadioButton)findViewById(R.id.btn_class);
+        final RadioButton btn_Eating = (RadioButton)findViewById(R.id.btn_eating);
+        final RadioButton btn_Rest = (RadioButton)findViewById(R.id.btn_rest);
+
         mHandler = new Handler(){
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 TimeSet();
+
+                if(btn_Class.isChecked()) TypeChange("class", "微積分");
+                if(btn_Eating.isChecked()) TypeChange("eating", "午餐");
+                if(btn_Rest.isChecked()) TypeChange("rest", "休息");
             }
         };
 
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 try{
                     while (true){
                         Thread.sleep(500);
                         mHandler.sendMessage(new Message());
+
                     }
                 }catch (InterruptedException E){
 
@@ -46,7 +57,9 @@ public class mainPage extends AppCompatActivity {
             }
         }).start();
 
-        TypeChange("eating", "廢廢");
+
+
+
     }
 
 
@@ -93,7 +106,7 @@ public class mainPage extends AppCompatActivity {
             btn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mainPage.this, classEvent.class);
+                    Intent intent = new Intent(mainPage.this, foodNew.class);
                     startActivity(intent);
 
                 }

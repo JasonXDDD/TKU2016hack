@@ -38,7 +38,9 @@ public class foodChoose extends AppCompatActivity {
         nnew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(foodChoose.this, foodNew.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
