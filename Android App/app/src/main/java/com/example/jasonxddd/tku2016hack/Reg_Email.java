@@ -29,6 +29,7 @@ public class Reg_Email extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(Reg_Email.this, mainPage.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
