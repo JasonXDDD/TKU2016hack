@@ -26,8 +26,6 @@ public class mainPage extends AppCompatActivity {
 
         Button choose = (Button)findViewById(R.id.choose);
 
-
-
     }
 
 

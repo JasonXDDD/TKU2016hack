@@ -3,12 +3,16 @@ package com.example.jasonxddd.tku2016hack;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 
@@ -25,6 +29,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +40,19 @@ public class MainActivity extends Activity {
             }
         });
 
+
+        RelativeLayout relativeLayout = (RelativeLayout)findViewById(R.id.my_Layout);
+        Resources res = this.getResources();
+        Drawable drawable;
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            drawable = res.getDrawable(R.drawable.login, getTheme());
+            relativeLayout.setBackground(drawable);
+        } else {
+            drawable = res.getDrawable(R.drawable.login);
+            relativeLayout.setBackgroundDrawable(drawable);
+        }
 
     }
 
