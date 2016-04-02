@@ -1,16 +1,10 @@
 package com.example.jasonxddd.tku2016hack;
 
-import android.app.Activity;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -19,9 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Time;
 import java.util.Calendar;
-import java.util.logging.LogRecord;
 
 public class mainPage extends AppCompatActivity {
     private Handler mHandler;
@@ -54,7 +46,7 @@ public class mainPage extends AppCompatActivity {
             }
         }).start();
 
-        TypeChange("rest", "廢廢");
+        TypeChange("class", "廢廢");
     }
 
 
@@ -91,6 +83,9 @@ public class mainPage extends AppCompatActivity {
             relativeLayout.setBackgroundColor(Color.parseColor("#ECD2FF"));
         }
 
+
+
+
         if(type.equals("class")){
             subject.setText(name);
             btn1.setText("考試");
@@ -98,11 +93,34 @@ public class mainPage extends AppCompatActivity {
 
             toolbar.setBackgroundColor(Color.parseColor("#1DBCD4"));
             relativeLayout.setBackgroundColor(Color.parseColor("#D2F9FF"));
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mainPage.this, classEvent.class);
+                    intent.putExtra("type", "quiz");
+                    startActivity(intent);
+                }
+            });
+
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mainPage.this, classEvent.class);
+                    intent.putExtra("type", "homework");
+                    startActivity(intent);
+
+                }
+            });
         }
+
+
+
 
         if(type.equals("rest")){
             subject.setText("休息");
             btn1.setText("耍廢");
+            btn2.setText("睡覺");
 
             toolbar.setBackgroundColor(Color.parseColor("#E9C108"));
             relativeLayout.setBackgroundColor(Color.parseColor("#FFF7D2"));
@@ -115,7 +133,6 @@ public class mainPage extends AppCompatActivity {
                 }
             });
 
-            btn2.setText("睡覺");
             btn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

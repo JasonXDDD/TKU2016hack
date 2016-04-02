@@ -77,17 +77,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="爽爽"
         android:id="@+id/subject"
-        android:textSize="150dp"
+        android:textSize="120dp"
         android:layout_below="@+id/tableRow"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp" />
+        android:layout_marginTop="15dp" />
 
     <TableRow
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/subject"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="30dp">
 
         <Button
             android:id="@+id/btn1"
