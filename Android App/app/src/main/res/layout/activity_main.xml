@@ -18,9 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="WHAT"
+        android:text="SECOND"
         android:id="@+id/textView"
-        android:textSize="100dp"
+        android:textSize="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
@@ -32,10 +32,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="EVER"
+        android:text="LIFE"
         android:id="@+id/textView4"
-        android:textSize="100dp"
-        android:layout_marginTop="100dp"
+        android:textSize="110dp"
+        android:layout_marginTop="80dp"
         android:layout_alignTop="@+id/textView"
         android:textColor="#ffffff"
         android:layout_centerHorizontal="true" />
@@ -47,7 +47,7 @@
         android:text="Account      "
         android:textColor="#ffffff"
         android:id="@+id/textView2"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="110dp"
         android:layout_below="@+id/textView4"
         android:layout_alignLeft="@+id/tableRow2"
         android:layout_alignStart="@+id/tableRow2" />
@@ -89,19 +89,16 @@
         android:layout_alignEnd="@+id/editText" />
 
     <TableRow
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="67dp"
         android:id="@+id/tableRow2"
         android:weightSum="1"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView">
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp">
 
         <Button
-            android:layout_width="132dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="Login"
             android:id="@+id/login"
@@ -114,10 +111,10 @@
             android:layout_alignEnd="@+id/textView"
             android:layout_alignLeft="@+id/textView"
             android:layout_alignStart="@+id/textView"
-            android:layout_weight="0.81" />
+            android:layout_weight="0.17" />
 
         <Button
-            android:layout_width="132dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="Register"
             android:id="@+id/register"
@@ -130,7 +127,8 @@
             android:layout_alignEnd="@+id/textView"
             android:layout_alignLeft="@+id/textView"
             android:layout_alignStart="@+id/textView"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.18" />
     </TableRow>
 
 
