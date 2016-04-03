@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jasonxddd.tku2016hack">
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +24,15 @@
         <activity android:name=".foodEvent" />
         <activity android:name=".foodChoose" />
         <activity android:name=".foodNew"></activity>
+
+        <uses-permission android:name="android.permission.INTERNET" />
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        
     </application>
 
 </manifest>

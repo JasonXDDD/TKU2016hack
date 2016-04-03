@@ -13,6 +13,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 public class MainActivity extends Activity {
 
@@ -34,6 +37,12 @@ public class MainActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                connect conn = new connect();
+                conn.onPostExecute("1");
+                //conn.doInBackground();
+
+                //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, mainPage.class);
                 startActivity(intent);
                 finish();
