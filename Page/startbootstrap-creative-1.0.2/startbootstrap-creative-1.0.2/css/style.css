@@ -1,0 +1,24 @@
+.XDp{
+	font-size: 30px !important;
+	font-weight: 600 !important;
+	color: white;
+}
+
+.XDsp{
+	font-size: 20px !important;
+	color: black;
+}
+
+.XDli{
+	font-size: 20px !important;
+	padding-bottom: 10px;
+	list-style: none;
+	text-align: left;
+	margin-left: 35%;
+}
+
+.XDpp{
+	!important;
+	color: black;
+	font-size: 5;
+}
