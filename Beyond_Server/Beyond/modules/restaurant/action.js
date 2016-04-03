@@ -37,12 +37,20 @@ var getRestaurant = function(id){
     return Restaurant.findById(id);
 }
 
-var getRestaurantListByArea = function(area){
-    return Restaurant.findAll({
-        where: {
-            area: area
-        }
-    })
+var getRestaurantListByArea = function(userId, area){
+    if(!area || area == '')
+        return Restaurant.findAll({
+            where: {
+                creatorUid: userId
+            }
+        })
+    else
+        return Restaurant.findAll({
+            where: {
+                area: area,
+                creatorUid: userId
+            }
+        })
 }
 
 var editRestaurant = function(id, name,address, lat, lng, area, suiteTime, avarage_cost, mealType){

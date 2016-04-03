@@ -24,7 +24,7 @@ router.get('/restaurant/', function (req, res) {
         res.status(401).end();
     User.findOne({where: {token: req.query.token}})
     .then(function(user){
-        return action.getRestaurantListByArea(req.query.area);  
+        return action.getRestaurantListByArea(user.uid, req.query.area);  
     })    
     .then(function(list){
         return res.status(200).json(list);
