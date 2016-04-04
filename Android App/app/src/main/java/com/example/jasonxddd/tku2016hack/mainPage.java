@@ -30,6 +30,8 @@ public class mainPage extends AppCompatActivity {
         final RadioButton btn_Eating = (RadioButton)findViewById(R.id.btn_eating);
         final RadioButton btn_Rest = (RadioButton)findViewById(R.id.btn_rest);
 
+        TypeChange("class", "微積分");
+
         mHandler = new Handler(){
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);

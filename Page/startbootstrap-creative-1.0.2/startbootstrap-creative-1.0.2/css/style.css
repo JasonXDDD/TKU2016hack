@@ -22,3 +22,8 @@
 	color: black;
 	font-size: 5;
 }
+
+.XDDiframe iframe{
+	margin: 0 auto;
+	display: block;
+}

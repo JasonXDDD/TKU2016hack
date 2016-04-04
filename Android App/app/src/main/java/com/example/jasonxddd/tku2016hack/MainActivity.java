@@ -38,9 +38,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                connect conn = new connect();
-                conn.onPostExecute("1");
-                //conn.doInBackground();
+
 
                 //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, mainPage.class);
